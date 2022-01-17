@@ -1,0 +1,11 @@
+8ca367786ae158718a0027084a957afc *DESCRIPTION
+a7673d97f51db9b89a8219c7123e9228 *NAMESPACE
+b46d94e58912d23ed1d0ca3acc02e181 *R/makl_test.R
+11eff23e3caa61a73fd61a342298a70a *R/makl_train.R
+f991d3546dba510afe42b0eeab4e648e *build/vignette.rds
+c165c887b07e043976583f3a78952fbb *inst/doc/makl_example.R
+a1771218d79b22db948d0c18cd422a88 *inst/doc/makl_example.Rmd
+b3ccc9e96609410d7c592e3f0a1b126e *inst/doc/makl_example.html
+7411cf5111e1f71be1b35d6c5930aeaf *man/makl_test.Rd
+8b121deda9171aff81f1a7d1977f38b2 *man/makl_train.Rd
+a1771218d79b22db948d0c18cd422a88 *vignettes/makl_example.Rmd
