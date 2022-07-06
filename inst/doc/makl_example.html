@@ -12,7 +12,7 @@
 
 
 
-<title>Example usage of makl_train() and makl_test() functions</title>
+<title>A Short Introduction to MAKL Package</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -36,6 +36,7 @@ document.addEventListener('DOMContentLoaded', function(e) {
   div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   ul.task-list{list-style: none;}
     </style>
+
 
 
 <style type="text/css">
@@ -329,7 +330,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 
 
 
-<h1 class="title toc-ignore">Example usage of makl_train() and makl_test() functions</h1>
+<h1 class="title toc-ignore">A Short Introduction to MAKL Package</h1>
 
 
 
@@ -338,7 +339,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">64327</span>) <span class="co">#midas</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rnorm</span>(<span class="dv">6000</span>, <span class="dv">0</span>, <span class="dv">1</span>), <span class="at">nrow =</span> <span class="dv">1000</span>)</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(df) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;F1&quot;</span>, <span class="st">&quot;F2&quot;</span>, <span class="st">&quot;F3&quot;</span>, <span class="st">&quot;F4&quot;</span>, <span class="st">&quot;F5&quot;</span>, <span class="st">&quot;F6&quot;</span>)</span></code></pre></div>
-<p>As to <code>membership</code> argument of <code>makl_train()</code> function, we prepare a list consisting of two groups such that the first one contains the features F1, F5 and F6; the second one contains the rest. Note that the column names of the input dataset should be the superset of the union of all feature names in the <code>groups</code> list.</p>
+<p>As to <code>membership</code> argument of <code>makl_train()</code>, we prepare a list consisting of two groups such that the first one contains the features F1, F5 and F6; the second one contains the rest. Note that the column names of the input dataset should be a superset of the union of all feature names in the <code>groups</code> list.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># check colnames(df) for them to be matching with group members</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>groups <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>groups[[<span class="dv">1</span>]] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;F1&quot;</span>, <span class="st">&quot;F5&quot;</span>, <span class="st">&quot;F6&quot;</span>)</span>
@@ -352,7 +353,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    y[i] <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">1</span></span>
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  }</span>
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
-<p>We use the synthetic dataset <code>df</code> and response vector <code>y</code> as our train dataset and train response vector in the <code>makl_train()</code> function, we choose the number of random features <code>D</code> equal to 2 which makes sense knowing that our train dataset is 6 dimensional. We choose the number of rows to be used for distance matrix calculation, <code>sigma_N</code> equal to 1000, and <code>lambda_set</code> consisting of 0.9, 0.8, 0.7, 0.6 for sparse solutions. As membership list, we use the <code>groups</code> list that we had created above.</p>
+<p>We use the synthetic dataset <code>df</code> and response vector <code>y</code> as our train dataset and train response vector in <code>makl_train()</code>, we choose the number of random features <code>D</code> equal to 2 which makes sense knowing that our train dataset is 6 dimensional. We choose the number of rows to be used for distance matrix calculation, <code>sigma_N</code> equal to 1000, and <code>lambda_set</code> consisting of 0.9, 0.8, 0.7, 0.6 for sparse solutions. As membership list, we use the <code>groups</code> list that we created above.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>makl_model <span class="ot">&lt;-</span> <span class="fu">makl_train</span>(<span class="at">X =</span> df, <span class="at">y =</span> y, <span class="at">D =</span> <span class="dv">2</span>, <span class="at">sigma_N =</span> <span class="dv">1000</span>, <span class="at">CV =</span> <span class="dv">1</span>, <span class="at">membership =</span> groups, <span class="at">lambda_set =</span> <span class="fu">c</span>(<span class="fl">0.9</span>, <span class="fl">0.8</span>, <span class="fl">0.7</span>, <span class="fl">0.6</span>))</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Lambda: 155.0901  nr.var: 5 </span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Lambda: 137.8579  nr.var: 5 </span></span>
@@ -370,7 +371,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [7,]       0.24539658        0.4973664        0.7630398       1.0509792</span></span>
 <span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [8,]      -0.36108294       -0.7320709       -1.1246002      -1.5535840</span></span>
 <span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [9,]       0.12450233        0.1542956        0.1858601       0.2195980</span></span></code></pre></div>
-<p>Now, let us create a synthetic dataset <code>df_test</code> and a synthetic test response vector <code>y_test</code> to use in <code>makl_test()</code> function to check the results.</p>
+<p>Now, let us create a synthetic dataset <code>df_test</code> and a synthetic test response vector <code>y_test</code> to use in <code>makl_test()</code> to check the results.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>df_test <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rnorm</span>(<span class="dv">600</span>, <span class="dv">0</span>, <span class="dv">1</span>), <span class="at">nrow =</span> <span class="dv">100</span>)</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(df_test) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;F1&quot;</span>, <span class="st">&quot;F2&quot;</span>, <span class="st">&quot;F3&quot;</span>, <span class="st">&quot;F4&quot;</span>, <span class="st">&quot;F5&quot;</span>, <span class="st">&quot;F6&quot;</span>)</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>y_test <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>

@@ -2,7 +2,7 @@
 % Please edit documentation in R/makl_train.R
 \name{makl_train}
 \alias{makl_train}
-\title{Function to Train a Multiple Approximate Kernel Learning (MAKL) Model}
+\title{Train a Multiple Approximate Kernel Learning (MAKL) Model}
 \usage{
 makl_train(
   X,
@@ -15,13 +15,13 @@ makl_train(
 )
 }
 \arguments{
-\item{X}{data matrix of size N x d, containing the training instances.}
+\item{X}{training dataset, matrix of size N x d.}
 
 \item{y}{response vector of length N, containing only -1 and 1.}
 
 \item{D}{numeric value related to the number of random features to be used for approximation.}
 
-\item{sigma_N}{numeric value preferably smaller than N, used to calculate sigma to create random features, it is a subset of the number of rows of X.}
+\item{sigma_N}{numeric value preferably smaller than N, used to calculate sigma to create random features.}
 
 \item{CV}{integer value between 0 and N. If CV is equal to 0 or 1, no cross validation is performed. If CV is greater than or equal to 2, CV is assigned as fold count in the cross validation.}
 
@@ -33,8 +33,5 @@ makl_train(
 a list containing the MAKL model and related parameters to be used in makl_test().
 }
 \description{
-Function to Train a Multiple Approximate Kernel Learning (MAKL) Model
-}
-\details{
-Trains a MAKL model to be used as an input to makl_test() function.
+Train a MAKL model to be used as an input to makl_test().
 }
